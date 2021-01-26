@@ -26,6 +26,9 @@ namespace SimpleMenuEx2
                     case "2":
                         Repeat10Times();
                         break;
+                    case "3":
+                        SplitString();
+                        break;
                     default:
                         Console.WriteLine("Felaktigt val! Försök igen!\n");
                         break;
@@ -44,7 +47,7 @@ namespace SimpleMenuEx2
                 Console.WriteLine("0 - Avsluta programmet");
                 Console.WriteLine("1 - Köp biobiljetter");
                 Console.WriteLine("2 - Repetera 10 gånger");
-                
+                Console.WriteLine("3 - Splittra en sträng");
 
                 Console.Write("\nDitt val: ");
                 
@@ -56,7 +59,7 @@ namespace SimpleMenuEx2
             Console.WriteLine("Hur många personer ska gå på bio?");
             Console.Write("Antal personer: ");
 
-            var number = Convert.ToInt32(Console.ReadLine());
+            var number = int.Parse(Console.ReadLine());
             
             if (number > 0)
             {
@@ -64,7 +67,7 @@ namespace SimpleMenuEx2
                 for (var i = 0; i < number; i++)
                 {
                     Console.Write($"Ålder för person {i + 1} i hela år : ");
-                    var age = Convert.ToInt32(Console.ReadLine());
+                    var age = int.Parse(Console.ReadLine());
                     if (age < 20)
                     {
                         if (age >= 5)
@@ -114,6 +117,17 @@ namespace SimpleMenuEx2
             }
             Console.WriteLine("\n");
             
+        }
+
+        static void SplitString()
+        {
+            Console.WriteLine("Mata in en mening minst 3 ord lång.");
+            Console.Write("Meningen: ");
+            var sentence = Console.ReadLine();
+            char[] separators = new char[] { ' ', '.', ',', '!' };
+            var subs = sentence.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            Console.WriteLine($"Det tredje ordet i meningen är: {subs[2]}");
+            Console.WriteLine("\n");
         }
     }
 }
