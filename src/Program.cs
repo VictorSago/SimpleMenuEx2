@@ -23,6 +23,9 @@ namespace SimpleMenuEx2
                     case "1":
                         CinemaTicketMenu();
                         break;
+                    case "2":
+                        Repeat10Times();
+                        break;
                     default:
                         Console.WriteLine("Felaktigt val! Försök igen!\n");
                         break;
@@ -40,6 +43,8 @@ namespace SimpleMenuEx2
                 Console.WriteLine("Välj ett alternativ:");
                 Console.WriteLine("0 - Avsluta programmet");
                 Console.WriteLine("1 - Köp biobiljetter");
+                Console.WriteLine("2 - Repetera 10 gånger");
+                
 
                 Console.Write("\nDitt val: ");
                 
@@ -52,43 +57,63 @@ namespace SimpleMenuEx2
             Console.Write("Antal personer: ");
 
             var number = Convert.ToInt32(Console.ReadLine());
-            int totalPrice = 0;
-            for (var i = 0; i < number; i++)
+            
+            if (number > 0)
             {
-                Console.Write($"Ålder för person {i + 1} i hela år : ");
-                var age = Convert.ToInt32(Console.ReadLine());
-                if (age < 20)
+                int totalPrice = 0;
+                for (var i = 0; i < number; i++)
                 {
-                    if (age >= 5)
+                    Console.Write($"Ålder för person {i + 1} i hela år : ");
+                    var age = Convert.ToInt32(Console.ReadLine());
+                    if (age < 20)
                     {
-                        Console.WriteLine("Ungdomspris: 80 kr.");
-                        totalPrice += 80;
+                        if (age >= 5)
+                        {
+                            Console.WriteLine("Ungdomspris: 80 kr.");
+                            totalPrice += 80;
+                        }
+                        else 
+                        {
+                            Console.WriteLine($"Barn uder 5 år går gratis.");
+                        }
                     }
-                    else 
+                    else if (age > 64)
                     {
-                        Console.WriteLine($"Barn uder 5 år går gratis.");
-                    }
-                }
-                else if (age > 64)
-                {
-                    if (age < 100)
-                    {
-                        Console.WriteLine("Pensionärpris: 90 kr.");
-                        totalPrice += 90;
+                        if (age < 100)
+                        {
+                            Console.WriteLine("Pensionärpris: 90 kr.");
+                            totalPrice += 90;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Hudraåringar går gratis.");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Hudraåringar går gratis.");
+                        Console.WriteLine("Standardpris: 120 kr.");
+                        totalPrice += 120;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Standardpris: 120 kr.");
-                    totalPrice += 120;
-                }
+                Console.WriteLine($"Totalpriset för biobiljetterna blir {totalPrice} kr.\n");
             }
+            else
+            {
+                Console.WriteLine($"Antalet personer kan inte vara mindre än 1!");
+            }
+        }
 
-            Console.WriteLine($"Totalpriset för biobiljetterna blir {totalPrice} kr.\n");
+        static void Repeat10Times()
+        {
+            Console.WriteLine("Mata in frasen som ska uprepas");
+            Console.Write("Frasen: ");
+            var phrase = Console.ReadLine();
+            for (var i = 0; i < 10; i++)
+            {
+                Console.Write($"{i + 1}. {phrase}" + (i < 9 ? ", " : "!\n"));                
+            }
+            Console.WriteLine("\n");
+            
         }
     }
 }
